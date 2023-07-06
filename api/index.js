@@ -1,10 +1,12 @@
 
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
+const getGenres = require('./src/Controllers/getGenres.js')
 
-// Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+// sincroniza todos los modelos junto con el servidor al iniciar.
+conn.sync({ force: true }).then(async () => {
+  await getGenres();
   server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
+    console.log('Server listening at 3001'); 
   });
 });
