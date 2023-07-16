@@ -46,9 +46,10 @@ const { DataTypes } = require('sequelize');
       type : DataTypes.FLOAT,
       allowNull: false,
     },
-    metacritic : {
-      type: DataTypes.INTEGER,
-      allowNull:false
+
+    db : {
+      type : DataTypes.BOOLEAN,
+      defaultValue: true
     }
 
   },{timestamps : false});

@@ -4,10 +4,10 @@ const axios = require("axios");
 const URL = `https://api.rawg.io/api/games?key=${API_KEY}`;
 const { Videogame, Genres } = require('../db.js');
 const { Op } = require('sequelize');
-const {mapDataResults, destrucData} = require ('./FuncionesH.js'); // importo los handlers personalizados
+const {mapDataResults, destrucData, mapDataDb} = require ('./FuncionesH.js'); // importo los handlers personalizados
 
 
-//! Obtener Juegos /////////////
+//! Obtener Juegos API /////////////
 
 const getGames = async (req,res) => {
     try {
@@ -24,6 +24,21 @@ const getGames = async (req,res) => {
         return res.status(500).json({error: error.message});
     };
 };
+
+//! Obtener Juegos DB /////////////
+
+const getDbGames = async (req,res) => {
+    try {
+        const game = await Videogame.findAll({where:{db : true}, include:[{model:Genres}]}) // Incluyo la tabla de genres
+        const arrayGames = [...game]
+        const arrayOrdenado = mapDataDb(arrayGames)
+
+        if(arrayGames) return res.json(arrayOrdenado)
+
+    } catch (error) {
+        return res.status(500).json({error: error.message});
+    }
+}
 
 //! Obtener Un Juego por ID en DB o API /////////////
 
@@ -60,7 +75,7 @@ const getGameByQuery = async (req,res)=>{
     //busco en DB    
     const dbName = await Videogame.findAll({where :{name: {
         [Op.iLike]: `%${name}%`}, // los % son comodines en sequelize para cualquier otro carácter
-        },
+        },include:[{model:Genres}]
     });    
     //busco en API
     const {data} = await axios (`${URL}&search=${name}`);
@@ -82,5 +97,6 @@ const getGameByQuery = async (req,res)=>{
 module.exports = {
     getGames,
     getGameById,
-    getGameByQuery
+    getGameByQuery,
+    getDbGames
 };

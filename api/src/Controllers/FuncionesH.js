@@ -27,9 +27,25 @@ const destrucData = (data)=>{
 return newData;
 };
 
+//\\\\\\\\ función para ordenar las props de VideoGames (cuando vienen en un array).
+const mapDataDb = (data)=>{
+
+    const dataOrdenada = data.map ((game)=> {
+        let{ id,name,description,platforms,background_image,released,rating,genres } = game;   
+        genres = genres.map (el=>{
+            let {id,name}= el
+            return({id,name})
+        }); 
+        return { id,name,description,platforms,background_image,released,rating,genres };
+    });
+    return dataOrdenada;
+};
+
+
 
 
 module.exports = {
     mapDataResults,
-    destrucData
+    destrucData,
+    mapDataDb
 };

@@ -34,8 +34,6 @@ const postGame = async (req,res)=>{
                     background_image: createGame.background_image,
                     released: createGame.released,
                     rating: createGame.rating,
-                    metacritic: createGame.metacritic,
-                    short_screenshots: createGame.short_screenshots,
                     genres: genresDb, // Agrego los genres al objeto de la respuesta a mostrar
                 };
     

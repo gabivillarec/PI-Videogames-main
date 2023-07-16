@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 50px;
+    margin-top: 10px;
+  }
+  
+  .text{
+    width: 150px;
+    margin-bottom: 10px;
+    margin-left: 50px;
+  }
+
+  .text label {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    border-bottom: 1px solid white;
+  }
+
+
+  .box input[type="checkbox"] {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+  }
+
+
+  
