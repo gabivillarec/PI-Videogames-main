@@ -1,5 +1,5 @@
 import style from './searchBar.module.css';
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import { useDispatch} from 'react-redux';
 import { searchByName, setLoading, cleanState, getGames, setPage } from '../../Redux/actions';
 
@@ -9,12 +9,6 @@ const SearchBar = () => {
   const [value, setValue] = useState('');
   const dispatch = useDispatch();
 
-// Life Cicle & useSelector
-  useEffect(() => {
-    return () => {
-      dispatch(cleanState());
-    };
-  }, [dispatch]);
 
 
 // Handlers del input

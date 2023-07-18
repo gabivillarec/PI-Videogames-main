@@ -57,7 +57,8 @@ const reducer = (state = initialState, {type, payload})=>{
 
         case SEARCH_NAME : return{
             ...state,
-            games : payload
+            games : payload,
+            allGames: payload,
         };
 
         case GET_GENRES : return{

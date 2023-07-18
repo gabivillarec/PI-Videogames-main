@@ -32,10 +32,10 @@ const GridCards = (props)=>{
 
     // Life cicle 
     useEffect (()=>{
-        dispatch(setLoading(true))
-        dispatch(getGames()).then(()=> dispatch(setLoading(false)));// Uso una promesa para sacar la pantalla de carga
+        games?.length ? dispatch (setLoading(false)) : dispatch(setLoading(true))
+        games?.length === 0 && dispatch(getGames()).then(()=> dispatch(setLoading(false)));// Uso una promesa para sacar la pantalla de carga
         dispatch(getGamesDb());
-        return () => dispatch(cleanState()); // Desmonto el estado global 
+        //return () => dispatch(cleanState()); // Desmonto el estado global 
     },[dispatch])
 
 
@@ -44,7 +44,9 @@ const GridCards = (props)=>{
         
         <div className={style.container}>
         
-            {loading ? (<h1 className={style.loading}>Loading...</h1>) : (<div className={style.container}>
+            {loading 
+            ? (<h1 className={style.loading}>Loading...</h1>) 
+            : (<div className={style.container}>
 
             <Filter className={style.filter}/>
 

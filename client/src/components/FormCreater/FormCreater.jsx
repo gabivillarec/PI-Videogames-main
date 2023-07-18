@@ -28,7 +28,7 @@ const FormCreater = (props)=>{
     useEffect(()=>{
         dispatch(getGenres())
 
-        return () => dispatch(cleanState());
+      //  return () => dispatch(cleanState());
     },[dispatch]);
 
     // useSelector (Genres & Db) & useNavigate

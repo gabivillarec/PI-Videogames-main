@@ -76,17 +76,18 @@ const getGameByQuery = async (req,res)=>{
     const dbName = await Videogame.findAll({where :{name: {
         [Op.iLike]: `%${name}%`}, // los % son comodines en sequelize para cualquier otro carácter
         },include:[{model:Genres}]
-    });    
+    });    console.log(dbName);
+    
     //busco en API
     const {data} = await axios (`${URL}&search=${name}`);
     
-    const dataQuery = mapDataResults(data)
+    const dataQuery = mapDataResults(data);
     //concateno el array de API con la dbName
-    const games = dataQuery.concat(dbName).slice(0,15);
+    const games = dbName.concat(dataQuery).slice(0,15);
 
     games.length 
     ? res.json(games)
-    : res.status(400).send("Don't have eny coincidence");
+    : res.status(400).send("don't have any match");
     
     } catch (error) {
     return res.status(500).json({error: error.message});    

@@ -2,7 +2,7 @@ import style from "./detail.module.css"
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getId, cleanID } from "../../Redux/actions";
+import { getId} from "../../Redux/actions";
 
 const Detail = () => {
     
@@ -11,7 +11,6 @@ const Detail = () => {
 
     useEffect(() => {
         dispatch(getId(id));
-        // return dispatch(cleanID());
     }, [dispatch, id]);
 
     const gameID = useSelector((state) => state.gameID);
@@ -22,6 +21,7 @@ const Detail = () => {
 
     return (
         <div key={id} className={style.container}>
+
             <h1>{gameID.name}</h1>
 
             <div className={style.genres}>
@@ -46,6 +46,7 @@ const Detail = () => {
             <h4>Metacritic: 🎖️ {gameID.metacritic}</h4>
 
             <h5>- Release Date: {gameID.released} -</h5>
+            
         </div>
     );
 };

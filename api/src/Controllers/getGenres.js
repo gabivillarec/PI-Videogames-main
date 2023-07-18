@@ -8,12 +8,12 @@ const getGenres = async (req,res)=>{
     try {
         let genres = await Genres.findAll({ attributes: ['id', 'name'] });// incluyo los atributos que quiero ver
 
-        if(genres.length === 0){
+        if(genres.length === 0){  // cargo la tabla con la API 
             const {data} = await axios (URL);
             const genMap = data.results.map(gen=>{let {name} = gen; return({name})});
             genres = genMap;
             
-            await Genres.bulkCreate(genres);
+            await Genres.bulkCreate(genres); // permite crear múltiples registros en una base de datos
         }
         
         return res.json(genres);
