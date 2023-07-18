@@ -1,10 +1,10 @@
 import style from './searchBar.module.css';
 import { useState, useEffect } from 'react';
 import { useDispatch} from 'react-redux';
-import { searchByName, setLoading, cleanState, getGames } from '../../Redux/actions';
+import { searchByName, setLoading, cleanState, getGames, setPage } from '../../Redux/actions';
 
 
-const SearchBar = (props) => {
+const SearchBar = () => {
 // State y dispatch
   const [value, setValue] = useState('');
   const dispatch = useDispatch();
@@ -20,12 +20,18 @@ const SearchBar = (props) => {
 // Handlers del input
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
+      dispatch(cleanState());
       dispatch(searchByName(value)); // busco por query (Enter)
+      dispatch(setPage(1));
+   
     }
   };
 
   const handleSearch = () => {
+    dispatch(cleanState());
     dispatch(searchByName(value)); // busco por query (Click)
+    dispatch(setPage(1));
+  
   };
 
   const handleReset = () => {

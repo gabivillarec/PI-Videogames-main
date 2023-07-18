@@ -3,16 +3,16 @@ import Card from "../Card/Card";
 import Filter from './Filter';
 import { useEffect, useState } from "react";
 import {useDispatch, useSelector} from "react-redux"
-import { getGames, getGamesDb, cleanState, setLoading } from "../../Redux/actions";
+import { getGames, getGamesDb, cleanState, setLoading, setPage } from "../../Redux/actions";
+
 
 const GridCards = (props)=>{
-    // States
-    const [currentPage, setCurrentPage] = useState(1);
-     
+ 
     // Dispatch + GlobalState
     const dispatch = useDispatch();
     const games = useSelector(state => state.games);
     const loading = useSelector(state => state.loading);
+    const currentPage = useSelector(state => state.currentPage);
     
     
     // Manejo de páginas
@@ -27,7 +27,7 @@ const GridCards = (props)=>{
   
     // Handler de los button siguiente y anterior 
     const handlePage = (pag)=>{
-        setCurrentPage(pag)
+        dispatch(setPage(pag))
     }
 
     // Life cicle 
@@ -38,11 +38,12 @@ const GridCards = (props)=>{
         return () => dispatch(cleanState()); // Desmonto el estado global 
     },[dispatch])
 
+
     //? RENDER
     return(
         
         <div className={style.container}>
-
+        
             {loading ? (<h1 className={style.loading}>Loading...</h1>) : (<div className={style.container}>
 
             <Filter className={style.filter}/>
@@ -59,7 +60,7 @@ const GridCards = (props)=>{
                 
 
                 {pageRange.map((page) => (  // Mapeo el array de paginas en botones ,les creo una key y modifico el estado currentPage para mostrar esa parte del slice
-                    <button key={page} onClick={() => setCurrentPage(page)} className={style.btnPage}>
+                    <button key={page} onClick={() => dispatch(setPage(page))} className={style.btnPage}>
                      {page} 
                     </button>
                     ))

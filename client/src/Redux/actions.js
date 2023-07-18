@@ -8,9 +8,10 @@ export const CLEAN_STATE = "CLEAN_STATE";
 export const SEARCH_NAME = 'SEARCH_NAME';
 export const GENRES_SORT = 'GENRES_SORT';
 export const AZ_SORT = 'AZ_SORT';
-export const GET_GENRES = "GET_GENRES"
-export const POST_GAME = "POST_GAME"
-export const ID_CLEAN = "ID_CLEAN"
+export const GET_GENRES = "GET_GENRES";
+export const POST_GAME = "POST_GAME";
+export const ID_CLEAN = "ID_CLEAN";
+export const SET_PAGE = "SET_PAGE";
 
 
 export const setLoading = (value)=> {
@@ -138,3 +139,10 @@ export const postGame = (form) => {
         }
     }
 };
+
+export const setPage = (value) => {
+    return{
+        type: SET_PAGE,
+        payload: value
+    }
+}

@@ -1,4 +1,4 @@
-import {  LOADING ,GET_GAMES_API, GET_GAMES_DB, CLEAN_STATE, SEARCH_NAME, GENRES_SORT, AZ_SORT, GET_GENRES, POST_GAME, GET_ID, ID_CLEAN } from "./actions";
+import {  LOADING ,GET_GAMES_API, GET_GAMES_DB, CLEAN_STATE, SEARCH_NAME, GENRES_SORT, AZ_SORT, GET_GENRES, POST_GAME, GET_ID, ID_CLEAN, SET_PAGE } from "./actions";
 
 const initialState = {
     games : [],
@@ -7,7 +7,8 @@ const initialState = {
     api:[],
     db:[],
     genres : [],
-    loading : true
+    loading : true,
+    currentPage: 1
 };
 
 
@@ -19,6 +20,11 @@ const reducer = (state = initialState, {type, payload})=>{
           ...state,
           loading: payload
         };
+
+        case SET_PAGE : return{
+          ...state,
+          currentPage: payload
+        }
 
         case GET_GAMES_DB : return{
           ...state,
