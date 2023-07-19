@@ -52,3 +52,9 @@
     width: 80%;
     
 }
+
+.loading{
+  font-size: 3rem;
+  text-shadow: 5px 5px 10px rgb(15, 50, 253);
+  text-align: center;
+}

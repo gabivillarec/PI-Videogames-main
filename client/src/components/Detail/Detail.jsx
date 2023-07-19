@@ -2,7 +2,7 @@ import style from "./detail.module.css"
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getId} from "../../Redux/actions";
+import { getId, cleanDetail} from "../../Redux/actions";
 
 const Detail = () => {
     
@@ -11,16 +11,23 @@ const Detail = () => {
 
     useEffect(() => {
         dispatch(getId(id));
+
+        return () => {
+            dispatch(cleanDetail());
+          };
     }, [dispatch, id]);
 
     const gameID = useSelector((state) => state.gameID);
+    const hasProperties = Object.keys(gameID).length > 0; // verifico si tengo juego ya en detail para renderizar el loading
 
     const renderDescription = () => {
         return { __html: gameID.description };
     };
 
     return (
-        <div key={id} className={style.container}>
+        !hasProperties 
+        ? <h1 className={style.loading}>Loading...</h1> 
+        : <div key={id} className={style.container}>
 
             <h1>{gameID.name}</h1>
 

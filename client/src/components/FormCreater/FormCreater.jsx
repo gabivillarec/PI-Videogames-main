@@ -2,7 +2,7 @@ import style from './formCreater.module.css'
 import CheckBoxes from './CheckBoxes';
 import {useDispatch, useSelector} from 'react-redux';
 import { useState, useEffect } from 'react';
-import {getGenres,cleanState, postGame} from '../../Redux/actions';
+import {getGenres, postGame, cleanState} from '../../Redux/actions';
 import validations from './validations/validations';
 import { useNavigate } from 'react-router-dom'
 
@@ -28,7 +28,6 @@ const FormCreater = (props)=>{
     useEffect(()=>{
         dispatch(getGenres())
 
-      //  return () => dispatch(cleanState());
     },[dispatch]);
 
     // useSelector (Genres & Db) & useNavigate
@@ -39,6 +38,7 @@ const FormCreater = (props)=>{
     // HANDLERS
     const handleSubmit = (event)=>{
         event.preventDefault();
+        dispatch(cleanState());
         dispatch(postGame(form));
         navigate("/home");
     }
@@ -52,7 +52,8 @@ const FormCreater = (props)=>{
     const handleCheckbox = (event) => {
         const checked = event.target.checked;
         const id = +event.target.value;
-      
+        console.log(event.target.checked);
+        
         if (checked) {
           // Agrego el género a genres
           setForm({ ...form, genres: [...form.genres, id] });
@@ -106,7 +107,7 @@ const FormCreater = (props)=>{
                 <CheckBoxes genres={genres} onChange={handleCheckbox} />  {/* paso genres como props */}
 
                 <button type="submit" className={style.btn} disabled={Object.keys(errors).length > 0 || !form.name || !form.description || !form.platforms 
-                    || !form.background_image || !form.released || !form.rating || !form.genres} onClick={handleSubmit}>
+                    || !form.background_image || !form.released || !form.rating || form.genres.length === 0} onClick={handleSubmit}>
                         <span className={style.btn__content}>Create Game</span>
                         <span className={style.btn__glitch}></span>
                         <span className={style.btn__label}>00X</span>

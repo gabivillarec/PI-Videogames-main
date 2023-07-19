@@ -1,8 +1,9 @@
-import {  LOADING ,GET_GAMES_API, GET_GAMES_DB, CLEAN_STATE, SEARCH_NAME, GENRES_SORT, AZ_SORT, GET_GENRES, POST_GAME, GET_ID, ID_CLEAN, SET_PAGE } from "./actions";
+import {  LOADING ,GET_GAMES_API, GET_GAMES_DB, CLEAN_STATE, SEARCH_NAME, GENRES_SORT, AZ_SORT, GET_GENRES, POST_GAME, GET_ID, ID_CLEAN, SET_PAGE, CLEAN_DETAIL } from "./actions";
 
 const initialState = {
     games : [],
     allGames : [],
+    trueGames: [],
     gameID:{},
     api:[],
     db:[],
@@ -36,6 +37,7 @@ const reducer = (state = initialState, {type, payload})=>{
             ...state,
             allGames: [...state.db, ...payload],
             games: [...state.db, ...payload],
+            trueGames: [...state.db, ...payload],
             api:payload
         };
 
@@ -54,6 +56,11 @@ const reducer = (state = initialState, {type, payload})=>{
             games: [],
             genres: []
         };
+
+        case CLEAN_DETAIL: return{
+          ...state,
+          gameID:{}
+        }
 
         case SEARCH_NAME : return{
             ...state,
@@ -78,17 +85,20 @@ const reducer = (state = initialState, {type, payload})=>{
             const filterGenres = state.allGames.filter(el => el.genres.find(gm => gm.name.includes(payload)));
 
             if(payload === "DB"){
-              return {...state, games: state.db}
+              return {...state,
+                currentPage: 1, 
+                games: state.db,
+                allGames:state.db}
             };
 
             if(payload === "API"){
-              return {...state, games: state.api}
+              return {...state, games: state.api, allGames:state.api}
             };
 
             return{
                 ...state,
                 games: payload === "All" 
-                ? [...state.allGames]
+                ? [...state.trueGames]
                 : filterGenres
             };
 

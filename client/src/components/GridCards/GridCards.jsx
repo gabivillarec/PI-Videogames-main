@@ -1,9 +1,9 @@
 import style from './gridCards.module.css'
 import Card from "../Card/Card";
 import Filter from './Filter';
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux"
-import { getGames, getGamesDb, cleanState, setLoading, setPage } from "../../Redux/actions";
+import { getGames, getGamesDb, setLoading, setPage } from "../../Redux/actions";
 
 
 const GridCards = (props)=>{
@@ -35,7 +35,7 @@ const GridCards = (props)=>{
         games?.length ? dispatch (setLoading(false)) : dispatch(setLoading(true))
         games?.length === 0 && dispatch(getGames()).then(()=> dispatch(setLoading(false)));// Uso una promesa para sacar la pantalla de carga
         dispatch(getGamesDb());
-        //return () => dispatch(cleanState()); // Desmonto el estado global 
+      
     },[dispatch])
 
 

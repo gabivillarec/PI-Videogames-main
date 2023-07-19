@@ -12,6 +12,7 @@ export const GET_GENRES = "GET_GENRES";
 export const POST_GAME = "POST_GAME";
 export const ID_CLEAN = "ID_CLEAN";
 export const SET_PAGE = "SET_PAGE";
+export const CLEAN_DETAIL = "CLEAN_DETAIL";
 
 
 export const setLoading = (value)=> {
@@ -19,7 +20,7 @@ export const setLoading = (value)=> {
         type: LOADING,
         payload : value
     }
-}
+};
 
 export const getGames = () => {
 
@@ -144,5 +145,11 @@ export const setPage = (value) => {
     return{
         type: SET_PAGE,
         payload: value
+    }
+};
+
+export const cleanDetail = () => {
+    return{
+        type: CLEAN_DETAIL
     }
 }
