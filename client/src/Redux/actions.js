@@ -26,7 +26,7 @@ export const getGames = () => {
 
     return async (dispatch)=>{
         try {
-            const {data} = await axios ('http://localhost:3001/videogames');
+            const {data} = await axios ('/videogames');
 
             return(dispatch({
                 type : GET_GAMES_API,
@@ -41,7 +41,7 @@ export const getGames = () => {
 export const getGamesDb = () =>{
     return async (dispatch) =>{
         try {
-            const {data} = await axios (`http://localhost:3001/videogames/db`)
+            const {data} = await axios (`/videogames/db`)
             
             return(dispatch({
                 type : GET_GAMES_DB,
@@ -56,7 +56,7 @@ export const getGamesDb = () =>{
 export const getId = (id) =>{
     return async (dispatch) =>{
         try {
-            const {data} = await axios (`http://localhost:3001/videogames/${id}`)
+            const {data} = await axios (`/videogames/${id}`)
             if(!data){
                 console.log('no hay data');  
             }
@@ -86,7 +86,7 @@ export const searchByName = (value)=>{
 
     return async (dispatch)=>{
         try {
-            const {data} = await axios (`http://localhost:3001/videogames/name?name=${value}`);
+            const {data} = await axios (`/videogames/name?name=${value}`);
 
             return(dispatch({
                 type : SEARCH_NAME,
@@ -116,7 +116,7 @@ export const aZSort = (value) => {
 
 export const getGenres = () => {
     return async (dispatch) =>{
-        const {data} = await axios ("http://localhost:3001/videogames/genres");
+        const {data} = await axios ("/videogames/genres");
 
         return (dispatch({
             type: GET_GENRES,
@@ -129,7 +129,7 @@ export const getGenres = () => {
 export const postGame = (form) => {
     return async (dispatch) =>{
         try {
-            const {data} = await axios.post('http://localhost:3001/videogames',form);
+            const {data} = await axios.post('/videogames',form);
     
             return (dispatch({
                 type : POST_GAME,
