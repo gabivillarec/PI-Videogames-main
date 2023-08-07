@@ -2,11 +2,12 @@
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 const getGenres = require('./src/Controllers/getGenres.js')
+const port = process.env.PORT || 3001;
 
 // sincroniza todos los modelos junto con el servidor al iniciar.
 conn.sync({ force: true }).then(async () => {
   await getGenres();
-  server.listen(3001, () => {
-    console.log('Server listening at 3001'); 
+  server.listen(port, () => {
+    console.log(`Server listening at ${port}`); 
   });
 });
