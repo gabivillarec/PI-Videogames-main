@@ -9,11 +9,9 @@ import axios from "axios";
 
 //? avisamos a axios que todas las peticiones tengan esta misma base Url
 //axios.defaults.baseURL = "http://localhost:3001" 
-<<<<<<< HEAD
+
 axios.defaults.baseURL = "https://api.render.com/deploy/srv-cj99c0avvtos73ceaa60?key=8rRmw65w51M" 
-=======
-axios.defaults.baseURL = "https://back-end-videogames.onrender.com" 
->>>>>>> c9d61141fe05287c3a28d7b452fed07216aef4b3
+
 
 ReactDOM.render(
 <Provider store = {store}>
