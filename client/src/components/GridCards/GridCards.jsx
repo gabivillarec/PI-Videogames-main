@@ -34,9 +34,8 @@ const GridCards = (props)=>{
     useEffect (()=>{
         games?.length ? dispatch (setLoading(false)) : dispatch(setLoading(true))
         games?.length === 0 && dispatch(getGames()).then(()=> dispatch(setLoading(false)));// Uso una promesa para sacar la pantalla de carga
-        dispatch(getGamesDb());
-      
-    })
+        dispatch(getGamesDb());    
+    },[games?.length])
 
 
     //? RENDER
