@@ -9,7 +9,7 @@ import axios from "axios";
 
 //? avisamos a axios que todas las peticiones tengan esta misma base Url
 //axios.defaults.baseURL = "http://localhost:3001" 
-axios.defaults.baseURL = "pi-videogames-main-production-2991.up.railway.app" 
+axios.defaults.baseURL = "https://back-end-videogames.onrender.com" 
 
 ReactDOM.render(
 <Provider store = {store}>
