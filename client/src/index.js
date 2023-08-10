@@ -8,9 +8,9 @@ import { Provider } from 'react-redux'
 import axios from "axios";
 
 //? avisamos a axios que todas las peticiones tengan esta misma base Url
-//axios.defaults.baseURL = "http://localhost:3001" 
+axios.defaults.baseURL = "http://localhost:3001" 
 
-axios.defaults.baseURL = "https://back-end-videogames.onrender.com" 
+//axios.defaults.baseURL = "https://back-end-videogames.onrender.com" 
 
 
 ReactDOM.render(
